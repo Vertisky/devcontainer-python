@@ -1,5 +1,5 @@
 ARG BASE_VERSION=v1.2.1
-ARG PYTHON_VERSION=latest
+ARG PYTHON_VERSION=3.9
 
 FROM etma/devcontainer-base:alpine-${BASE_VERSION}
 ARG VERSION
@@ -22,7 +22,8 @@ LABEL \
     org.opencontainers.image.created=$BUILD_DATE
 
 RUN apk add --no-cache \
-        python3 python3-dev py3-pip py3-venv \
+        python${PYTHON_VERSION} python${PYTHON_VERSION}-dev \
+        python3-pip python3-venv \
         build-base ca-certificates curl \
         git jq libffi-dev openssl-dev \
         openssh-client tzdata zlib-dev \

@@ -55,7 +55,7 @@ jobs:
       - name: Install zsh
         run: sudo apt-get update && sudo apt-get install -y zsh
 
-      - name: Get go versions
+      - name: Get python versions
         id: get-python-versions
         run: |
           ./.asdf/bin/asdf plugin add python
@@ -63,7 +63,6 @@ jobs:
           versions=()
           ./.asdf/bin/asdf list all python | sort -V | while read line ; do
               if is-at-least 3.9.0 $line; then
-                // skip anything that does not start with a number and anything that does not end with a number
                 if [[ ! $line =~ ^[0-9]+.*[0-9]+$ ]]; then
                   continue
                 else

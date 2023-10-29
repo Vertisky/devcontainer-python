@@ -39,20 +39,7 @@ jobs:
 
       - name: Get python versions
         id: get-python-versions
-        run: |
-          ./.asdf/bin/asdf plugin add python
-          autoload is-at-least
-          versions=()
-          ./.asdf/bin/asdf list all python | sort -V | while read line ; do
-              if is-at-least 3.9.0 $line; then
-                if [[ ! $line =~ ^[0-9]+.*[0-9]+$ ]]; then
-                  continue
-                else
-                  versions+=("$line")
-                fi
-              fi
-          done
-          echo "python-versions=$(jq --compact-output --null-input '$ARGS.positional' --args -- "${versions[@]}")" >> $GITHUB_OUTPUT
+        run: docker run continuumio/anaconda3 conda search python | grep -v Name | grep -v '^$' | grep -v 'channels:' | awk '{print $2}' | sort -V | uniq > $GITHUB_OUTPUT
         shell: zsh {0}
 
   verify:

@@ -8,12 +8,14 @@ on:
     paths:
       - .github/workflows/debian-python-kube.yaml
       - containers/debian-kube.Dockerfile
+      - containers/debian-kube-base.Dockerfile
       - .dockerignore
       - containers/shell/**
   pull_request:
     paths:
       - .github/workflows/debian-python-kube.yaml
       - containers/debian-kube.Dockerfile
+      - containers/debian-kube-base.Dockerfile
       - .dockerignore
       - containers/shell/**
 

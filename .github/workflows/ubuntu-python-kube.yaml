@@ -8,12 +8,14 @@ on:
     paths:
       - .github/workflows/ubuntu-python-kube.yaml
       - containers/ubuntu-kube.Dockerfile
+      - containers/ubuntu-kube-base.Dockerfile
       - .dockerignore
       - containers/shell/**
   pull_request:
     paths:
       - .github/workflows/ubuntu-python-kube.yaml
       - containers/ubuntu-kube.Dockerfile
+      - containers/ubuntu-kube-base.Dockerfile
       - .dockerignore
       - containers/shell/**
 

@@ -8,12 +8,14 @@ on:
     paths:
       - .github/workflows/ubuntu-python.yaml
       - containers/ubuntu.Dockerfile
+      - containers/ubuntu-base.Dockerfile
       - .dockerignore
       - containers/shell/**
   pull_request:
     paths:
       - .github/workflows/ubuntu-python.yaml
       - containers/ubuntu.Dockerfile
+      - containers/ubuntu-base.Dockerfile
       - .dockerignore
       - containers/shell/**
 

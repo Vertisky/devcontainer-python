@@ -21,6 +21,10 @@ LABEL \
 
 ENV PATH /opt/conda/bin:/opt/conda/envs/py${PYTHON_VERSION}/bin:$PATH
 
+RUN conda config --add channels conda-forge \
+    && conda update --all --yes \
+    && conda clean --all --yes
+
 RUN conda create -n py${PYTHON_VERSION} python=${PYTHON_VERSION} \
     && conda clean --all --yes \
     && echo "conda activate py${PYTHON_VERSION}" >> ~/.profile

@@ -31,9 +31,11 @@ jobs:
       - name: Get python versions
         id: get-python-versions
         run: |
+          versions=()
           for line in $(docker run continuumio/anaconda3 conda search python | grep -v Name | grep -v '^$' | grep -v 'channels:' | awk '{print $2}' | sort -V | uniq); do
-            echo $line >> $GITHUB_OUTPUT
+            versions+=($line)
           done
+          echo "python-versions=$(jq --compact-output --null-input '$ARGS.positional' --args -- "${versions[@]}")" >> $GITHUB_OUTPUT
 
   verify:
     runs-on: ubuntu-latest

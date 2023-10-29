@@ -16,7 +16,6 @@ on:
       - containers/debian.Dockerfile
       - .dockerignore
       - containers/shell/**
-
 jobs:
   verify:
     runs-on: ubuntu-latest

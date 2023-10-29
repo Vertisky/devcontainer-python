@@ -21,14 +21,10 @@ LABEL \
     org.opencontainers.image.revision=$COMMIT \
     org.opencontainers.image.created=$BUILD_DATE
 
-RUN apt-get update \
-    && apt-get install -y --no-install-recommends \
-        software-properties-common build-essential \
-        ca-certificates curl git jq gpg
-RUN add-apt-repository ppa:deadsnakes/ppa \
-    && apt-get update
-RUN apt-get install -y --no-install-recommends \
-        python${PYTHON_VERSION} python${PYTHON_VERSION}-dev python${PYTHON_VERSION}-distutils \
-        python3-pip python3-venv \
-    && apt-get clean \
-    && rm -rf /var/lib/apt/lists/*
+RUN conda create -n py${PYTHON_VERSION} python=${PYTHON_VERSION} \
+    && conda clean --all --yes \
+    && echo "conda activate py${PYTHON_VERSION}" >> ~/.profile
+
+ENV PATH /opt/conda/envs/py${PYTHON_VERSION}/bin:$PATH
+
+

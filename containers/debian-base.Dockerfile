@@ -1,14 +1,14 @@
-ARG PYTHON_VERSION=3.9
+ARG BASE_VERSION=v1.2.1
 
-FROM etma/devcontainer-python:ubuntu-base
+FROM etma/devcontainer-base:debian-${BASE_VERSION}
 ARG VERSION
 ARG COMMIT
 ARG BUILD_DATE
-ARG PYTHON_VERSION
+ARG BASE_VERSION
 
 LABEL \
-    org.opencontainers.image.title="DevContainer for PYTHON" \
-    org.opencontainers.image.description="Ubuntu PYTHON image for dev containers." \
+    org.opencontainers.image.title="DevContainer for python" \
+    org.opencontainers.image.description="Debian python image for dev containers." \
     org.opencontainers.image.url="https://github.com/vertisky/devcontainers-python" \
     org.opencontainers.image.documentation="https://github.com/vertisky/devcontainers-python" \
     org.opencontainers.image.source="https://github.com/vertisky/devcontainers-python" \
@@ -19,9 +19,13 @@ LABEL \
     org.opencontainers.image.revision=$COMMIT \
     org.opencontainers.image.created=$BUILD_DATE
 
-RUN conda create -n py${PYTHON_VERSION} python=${PYTHON_VERSION} \
-    && conda clean --all --yes \
-    && echo "conda activate py${PYTHON_VERSION}" >> ~/.profile
+RUN apt-get update \
+    && apt-get install -y --no-install-recommends \
+        software-properties-common build-essential \
+        ca-certificates curl git jq gpg
 
-ENV PATH /opt/conda/envs/py${PYTHON_VERSION}/bin:$PATH
+RUN curl -o anaconda.sh https://repo.anaconda.com/archive/Anaconda3-2023.03-1-Linux-x86_64.sh && \
+    chmod +x anaconda.sh && bash anaconda.sh -b -p /opt/conda && \
+    rm anaconda.sh
 
+ENV PATH /opt/conda/bin:$PATH

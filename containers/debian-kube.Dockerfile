@@ -24,7 +24,7 @@ LABEL \
 RUN apt-get update \
     && apt-get install -y --no-install-recommends \
         software-properties-common build-essential \
-        ca-certificates curl git jq gpg-agent
+        ca-certificates curl git jq gpg
 RUN add-apt-repository ppa:deadsnakes/ppa \
     && apt-get update
 RUN apt-get install -y --no-install-recommends \

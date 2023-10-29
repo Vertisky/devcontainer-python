@@ -51,7 +51,9 @@ jobs:
         run: |
           versions=()
           for line in $(docker run continuumio/anaconda3 conda search python | grep -v Name | grep -v '^$' | grep -v 'channels:' | awk '{print $2}' | sort -V | uniq); do
-            versions+=($line)
+            if [[ $line == 3* ]]; then
+              versions+=($line)
+            fi
           done
           echo "python-versions=$(jq --compact-output --null-input '$ARGS.positional' --args -- "${versions[@]}")" >> $GITHUB_OUTPUT
   latest:

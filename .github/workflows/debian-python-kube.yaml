@@ -72,7 +72,7 @@ jobs:
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
       - name: Build Debian
-        run: docker build --build-arg PYTHON_VERSION=latest -t etma/devcontainer-python:debian-kube -f ./containers/debian-kube.Dockerfile .
+        run: docker build --build-arg PYTHON_VERSION=3.12 -t etma/devcontainer-python:debian-kube -f ./containers/debian-kube.Dockerfile .
 
   latest:
     runs-on: ubuntu-latest
@@ -141,7 +141,7 @@ jobs:
             CREATED=${{ steps.vars.outputs.created }}
             REVISION=${{ steps.vars.outputs.commit }}
             VERSION=${{ steps.vars.outputs.version }}
-            PYTHON_VERSION=latest
+            PYTHON_VERSION=3.12
           tags: |
             etma/devcontainer-python:${{ steps.vars.outputs.version }}
             etma/devcontainer-python:${{ steps.vars.outputs.debian_version }}

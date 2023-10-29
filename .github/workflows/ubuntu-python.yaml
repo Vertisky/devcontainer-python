@@ -38,7 +38,7 @@ jobs:
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
       - name: Build Ubuntu
-        run: docker build --build-arg PYTHON_VERSION=latest -t etma/devcontainer-python:ubuntu -f ./containers/ubuntu.Dockerfile .
+        run: docker build --build-arg PYTHON_VERSION=3.12 -t etma/devcontainer-python:ubuntu -f ./containers/ubuntu.Dockerfile .
   gather:
     runs-on: ubuntu-latest
     outputs:
@@ -140,7 +140,7 @@ jobs:
             CREATED=${{ steps.vars.outputs.created }}
             REVISION=${{ steps.vars.outputs.commit }}
             VERSION=${{ steps.vars.outputs.version }}
-            PYTHON_VERSION=latest
+            PYTHON_VERSION=3.12
           tags: |
             etma/devcontainer-python:${{ steps.vars.outputs.version }}
             etma/devcontainer-python:${{ steps.vars.outputs.ubuntu_version }}

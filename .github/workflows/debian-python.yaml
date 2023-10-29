@@ -28,19 +28,12 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - uses: actions/checkout@v3
-        with:
-          repository: asdf-vm/asdf.git
-          path: ./.asdf
-          ref: v0.11.0
-
-      - name: Install zsh
-        run: sudo apt-get update && sudo apt-get install -y zsh
-
       - name: Get python versions
         id: get-python-versions
-        run: docker run continuumio/anaconda3 conda search python | grep -v Name | grep -v '^$' | grep -v 'channels:' | awk '{print $2}' | sort -V | uniq > $GITHUB_OUTPUT
-        shell: zsh {0}
+        run: |
+          for line in $(docker run continuumio/anaconda3 conda search python | grep -v Name | grep -v '^$' | grep -v 'channels:' | awk '{print $2}' | sort -V | uniq); do
+            echo $line >> $GITHUB_OUTPUT
+          done
 
   verify:
     runs-on: ubuntu-latest

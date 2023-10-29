@@ -22,7 +22,7 @@ LABEL \
 RUN apt-get update \
     && apt-get install -y --no-install-recommends \
         software-properties-common build-essential \
-        ca-certificates curl git jq gpg
+        ca-certificates curl git jq
 
 RUN curl -o anaconda.sh https://repo.anaconda.com/archive/Anaconda3-2023.03-1-Linux-x86_64.sh && \
     chmod +x anaconda.sh && bash anaconda.sh -b -p /opt/conda && \

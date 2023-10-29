@@ -1,7 +1,7 @@
 ARG BASE_VERSION=v1.2.1
 ARG PYTHON_VERSION=3.9
 
-FROM etma/devcontainer-base:debian-${BASE_VERSION}
+FROM etma/devcontainer-python:debian-base
 ARG VERSION
 ARG COMMIT
 ARG BUILD_DATE

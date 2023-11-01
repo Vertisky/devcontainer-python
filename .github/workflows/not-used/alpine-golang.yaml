@@ -19,7 +19,7 @@ on:
 
 jobs:
   verify:
-    runs-on: ubuntu-latest
+    runs-on: devcontainer-python-arc-set
     steps:
       - uses: actions/checkout@v3
 
@@ -40,7 +40,7 @@ jobs:
         run: docker build --build-arg GO_VERSIONS=latest -t etma/devcontainer:golang-alpine -f ./containers/alpine.Dockerfile .
 
   publish:
-    runs-on: ubuntu-latest
+    runs-on: devcontainer-python-arc-set
     needs: ['verify']
     if: github.event_name == 'push'
     steps:

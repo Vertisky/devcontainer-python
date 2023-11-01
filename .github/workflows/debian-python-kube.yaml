@@ -19,7 +19,7 @@ on:
 
 jobs:
   verify:
-    runs-on: ubuntu-latest
+    runs-on: devcontainer-python-arc-set
     steps:
       - uses: actions/checkout@v3
 
@@ -39,7 +39,7 @@ jobs:
       - name: Build Debian
         run: docker build --build-arg PYTHON_VERSION=3.12 -t etma/devcontainer-python:debian-kube -f ./containers/debian-kube.Dockerfile .
   gather:
-    runs-on: ubuntu-latest
+    runs-on: devcontainer-python-arc-set
     needs: ['verify']
     outputs:
       python-versions: ${{ steps.get-python-versions.outputs.python-versions }}
@@ -58,7 +58,7 @@ jobs:
           echo "python-versions=$(jq --compact-output --null-input '$ARGS.positional' --args -- "${versions[@]}")" >> $GITHUB_OUTPUT
 
   latest:
-    runs-on: ubuntu-latest
+    runs-on: devcontainer-python-arc-set
     needs: ['verify', 'gather']
     if: github.event_name == 'push'
     permissions:
@@ -132,7 +132,7 @@ jobs:
           cache-to: type=local,dest=/tmp/.buildx-cache-new,mode=max
 
   publish:
-    runs-on: ubuntu-latest
+    runs-on: devcontainer-python-arc-set
     needs: ['verify', 'gather']
     if: github.event_name == 'push'
     permissions:

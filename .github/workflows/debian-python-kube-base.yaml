@@ -19,7 +19,7 @@ on:
 
 jobs:
   base:
-    runs-on: ubuntu-latest
+    runs-on: devcontainer-python-arc-set
     permissions:
       packages: write
     steps:
